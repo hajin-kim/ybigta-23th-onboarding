@@ -1,0 +1,28 @@
+Table "배우" {
+  "이름" varchar [primary key]
+  "성별" enum
+  "출생" date
+}
+
+Table "영화" {
+  "제목" varchar [primary key]
+  "개봉" date
+  "감독이름" varchar
+}
+
+Table "감독" {
+  "이름" varchar [primary key]
+  "출생" date
+}
+
+Table "영화배역" {
+  "영화제목" varchar [primary key]
+  "배우이름" varchar [primary key]
+  "배역" varchar
+}
+
+Ref: "영화"."감독이름" > "감독"."이름"
+
+Ref: "영화배역"."영화제목" > "영화"."제목"
+
+Ref: "영화배역"."배우이름" > "배우"."이름"
