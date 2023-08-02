@@ -1,0 +1,9 @@
+version: "3"
+name: ybigta_homework_aws
+services:
+  ybigta_homework_nodejs:
+    build: ./node_image
+    image: kimhajin/ybigta_homework_nodejs
+    container_name: ybigta_homework_nodejs
+    ports:
+      - "80:80"
