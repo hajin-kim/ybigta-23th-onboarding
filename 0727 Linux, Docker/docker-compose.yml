@@ -1,0 +1,9 @@
+version: "3"
+name: ybigta_homework_compose
+services:
+  ybigta_homework:
+    build: .
+    image: ubuntu/ybigta_homework
+    container_name: ybigta_homework
+    stdin_open: true
+    tty: true
