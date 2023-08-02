@@ -8,7 +8,7 @@
 docker build -t ubuntu/ybigta_homework ./
 ```
 
-혹은 [docker-compose.yml](docker-compose.yml)를 통해 다음과 같이 빌드 및 실행할 수 있습니다.
+혹은 [도커 컴포즈](docker-compose.yml)를 통해 다음과 같이 빌드 및 실행할 수 있습니다.
 
 ```sh
 docker-compose run ybigta_homework
@@ -56,3 +56,9 @@ docker run -it ubuntu/ybigta-homework
 3개 파일 모두 정상적으로 생성되었습니다.
 
 ![3-task4](resources/3-task4.png)
+
+## Optional: 도커 허브에 업로드하기
+
+`docker commit -m ":tada: Initialize repository" ybigta_homework kimhajin/ybigta_homework`
+명령어를 통해 커밋을 생성하고, `docker push kimhajin/ybigta_homework` 명령어를 통해 푸시했습니다.
+[도커 허브 레포지토리](https://hub.docker.com/repository/docker/kimhajin/ybigta_homework)가 정상적으로 생성되었습니다.
