@@ -2,9 +2,9 @@
   text-align: center;
 }
 
-.black-nav {
+.antiquewhite-nav {
   display: flex;
-  background: black;
+  background: antiquewhite;
   width: 100%;
   color: white;
   padding-left: 20px;

@@ -1,8 +1,6 @@
-// App.css 파일 불러오기
-// --------- 이 주석을 지우고 여기에 코드 작성 -------
+import './App.css';
 
-// React, useState 불러오기
-// --------- 이 주석을 지우고 여기에 코드 작성 -------
+import { useState } from "react";
 
 function App() {
 
@@ -13,32 +11,30 @@ function App() {
   ]);
   const [good, setGood] = useState([0, 0, 0]);
   const [modal, setModal] = useState(false);
-  const [changeTitle, setChangeTitle] = useState(0);
+  const [changeTitleIndex, setChangeTitleIndex] = useState(0);
 
-  // 작성내용을 저장하는 상태관리 변수 생성
-  // --------- 이 주석을 지우고 여기에 코드 작성 -------
-
-  // 내용 클릭하면 색상 변하는 상태관리 변수 생성 
-  // --------- 이 주석을 지우고 여기에 코드 작성 -------
+  const [inputValue, setInputValue] = useState("");
 
   return (
     <div className="App">
-      <div className="black-nav"> {/*배경색 다른색으로 수정*/}
+      <div className="antiquewhite-nav">
         <div>
-          <h4 style={{ color: "white", fontSize: "16px" }}>Blog</h4>
+          <h4 style={{ color: "brown", fontSize: "16px" }}>Blog</h4>
         </div>
         <div className="submit">
-          {/*글 발행 버튼 누르면 작성한 내용이 작성내용 상태관리 변수에 업데이트 되는 코드 작성*/}
-          {/* -------------------------------------
-          -----------------------------------------
-          ---- 이 주석을 지우고 여기에 코드 작성 ----
-          -----------------------------------------
-          -----------------------------------------*/}
+          <input
+            onChange={(e) => {
+              setInputValue(e.target.value);
+            }}
+          ></input>
           <button
             onClick={() => {
-              let copy = [...title];
-              copy.unshift(inputValue);
-              setTitle(copy);
+              let titleCopy = [...title];
+              titleCopy.unshift(inputValue);
+              setTitle(titleCopy);
+              const goodCopy = [...good];
+              goodCopy.unshift(0);
+              setGood(goodCopy);
             }}
           >
             글 발행
@@ -50,13 +46,13 @@ function App() {
           <div className="list">
             <h4
               onClick={() => {
-                // title 클릭 시 상태 변경 코드 작성
-                // --------- 이 주석을 지우고 여기에 코드 작성 -------
-                setModal(!modal);
-                setChangeTitle(i);
+                if (!modal || changeTitleIndex === i)
+                  setModal(!modal);
+                setChangeTitleIndex(i);
               }}
-            // 클릭되면 글자색 다른색으로 변경되는 코드 작성
-            // --------- 이 주석을 지우고 여기에 코드 작성 -------
+              style={{
+                color: (modal && changeTitleIndex === i) ? "burlywood" : "black"
+              }}
             >
               {title[i]}
               <span
@@ -75,21 +71,31 @@ function App() {
           </div>
         );
       })}
-      {modal == true ? (
-        <Modal
-          title={title}
-          changeTitle={changeTitle}
-        ></Modal>
-      ) : null}
-    </div>
+      {
+        modal ? (
+          <Modal
+            title={title}
+            changeTitleIndex={changeTitleIndex}
+            setTitle={setTitle}
+          ></Modal>
+        ) : null
+      }
+    </div >
   );
 }
 
 function Modal(props) {
   return (
     <div className="modal">
-      <h4>{props.title[props.changeTitle]}</h4>
-    </div>
+      <h4>{props.title[props.changeTitleIndex]}</h4>
+      <input
+        value={props.title[props.changeTitleIndex]}
+        onChange={(e) => {
+          props.title[props.changeTitleIndex] = e.target.value;
+          props.setTitle([...props.title]);
+        }}
+      ></input>
+    </div >
   );
 }
 
